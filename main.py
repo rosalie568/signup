@@ -23,7 +23,7 @@ user_form = """
     </head>
     <body>
         <h1>Sign Up</h1>
-        <form action="/signUp" method="post">
+        <form method="post">
         <table>
             <tr>
                 <td> Username   </td>
@@ -85,7 +85,7 @@ class SignUpForm(webapp2.RequestHandler):
     def post(self):
         username = self.request.get('username')
         password = self.request.get('password')
-        verify_pass = self.request.get('verify_pass')
+        verify = self.request.get('verify_pass')
         email = self.request.get('email')
         usr_err = ""
         pass_err = ""
@@ -107,18 +107,21 @@ class SignUpForm(webapp2.RequestHandler):
             email_err = "That's not a valid email."
             email_bool = False
 
+        if email == 0:
+            email_bool = True
+
         if usr_bool and pass_bool and email_bool and (password == verify):
             self.redirect('/welcome?username=%s' % username)
         else:
-            self.write_form(username, password, verify_pass, email,
+            self.write_form(username, password, verify, email,
                             usr_err, pass_err, ver_err, email_err)
 
-class WelcomeHandler(webapp2.RequestHandler):
+class WelcomePage(webapp2.RequestHandler):
     def get(self):
         username = self.request.get('username')
         self.response.out.write(welcome_form % username)
 
 app = webapp2.WSGIApplication([
     ('/', SignUpForm),
-    ('/welcome', welcome_form),
+    ('/welcome', WelcomePage),
 ], debug=True)
