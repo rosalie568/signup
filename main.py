@@ -32,12 +32,12 @@ user_form = """
                 </tr>
                 <tr>
                 <td> Password </td>
-                <td> <input type="text" name="password" value="%(password)s" /> </td>
+                <td> <input type="password" name="password" /> </td>
                 <td> %(pass_err)s</td>
             </tr>
             <tr>
                 <td> Verify Password </td>
-                <td> <input type="text" name="verify" value="%(verify)s" /> </td>
+                <td> <input type="password" name="verify" /> </td>
                 <td> %(ver_err)s </td>
             </tr>
             <tr>
@@ -85,7 +85,7 @@ class SignUpForm(webapp2.RequestHandler):
     def post(self):
         username = self.request.get('username')
         password = self.request.get('password')
-        verify = self.request.get('verify_pass')
+        verify = self.request.get('verify')
         email = self.request.get('email')
         usr_err = ""
         pass_err = ""
@@ -107,7 +107,11 @@ class SignUpForm(webapp2.RequestHandler):
             email_err = "That's not a valid email."
             email_bool = False
 
-        if email == 0:
+        if verify == "":
+            ver_err = "You need to verify your password."
+
+        if email == "":
+            email_err = ""
             email_bool = True
 
         if usr_bool and pass_bool and email_bool and (password == verify):
