@@ -107,9 +107,6 @@ class SignUpForm(webapp2.RequestHandler):
             email_err = "That's not a valid email."
             email_bool = False
 
-        if verify == "":
-            ver_err = "You need to verify your password."
-
         if email == "":
             email_err = ""
             email_bool = True
