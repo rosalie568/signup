@@ -20,6 +20,11 @@ user_form = """
 <html>
     <head>
         <title>Sign Up Page</title>
+        <style>
+            .error {
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <h1>Sign Up</h1>
@@ -27,23 +32,23 @@ user_form = """
         <table>
             <tr>
                 <td> Username   </td>
-                <td> <input type="text" name="username" value="%(username)s" /> </td>
-                <td> %(usr_err)s</td>
-                </tr>
-                <tr>
+                <td> <input type="text" name="username" value="%(username)s"  required /> </td>
+                <td> <span class="error">%(usr_err)s </span> </td>
+            </tr>
+            <tr>
                 <td> Password </td>
-                <td> <input type="password" name="password" /> </td>
-                <td> %(pass_err)s</td>
+                <td> <input type="password" name="password" required /> </td>
+                <td> <span class="error">%(pass_err)s</span> </td>
             </tr>
             <tr>
                 <td> Verify Password </td>
-                <td> <input type="password" name="verify" /> </td>
-                <td> %(ver_err)s </td>
+                <td> <input type="password" name="verify"  required /> </td>
+                <td> <span class="error">%(ver_err)s </span> </td>
             </tr>
             <tr>
                 <td> Email (optional) </td>
                 <td> <input type="text" name="email" value="%(email)s" /> </td>
-                <td> %(email_err)s</td>
+                <td> <span class="error">%(email_err)s </span></td>
             </tr>
             <tr>
                 <td> <input type ="submit" value="Submit" /> </td>
