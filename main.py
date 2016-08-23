@@ -75,6 +75,7 @@ welcome_form = """
 class SignUpForm(webapp2.RequestHandler):
     def write_form(self, username="", password="", verify="", email="",
                    usr_err="", pass_err="", ver_err="", email_err=""):
+                   
                    self.response.out.write(user_form % {'username': username,
                                                'password': password,
                                                'verify': verify,
